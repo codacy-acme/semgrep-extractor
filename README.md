@@ -1,6 +1,6 @@
 # Codacy to Semgrep Configuration Converter
 
-A Python utility that converts Codacy code analysis configurations to Semgrep-compatible rule sets. This tool helps organizations migrate their code analysis rules from Codacy to Semgrep while maintaining their established code quality standards.
+A Python utility that converts Codacy code analysis configurations to Semgrep-compatible rule sets. This tool helps organizations use their code analysis rules from Codacy to Semgrep locally while maintaining their established code quality standards.
 
 ## Features
 
