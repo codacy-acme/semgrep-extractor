@@ -23,7 +23,7 @@ A Python utility that converts Codacy code analysis configurations to Semgrep-co
 1. Clone this repository:
 ```bash
 git clone [repository-url]
-cd codacy-to-semgrep
+cd semgrep-extractor
 ```
 
 2. Install required dependencies:
@@ -42,7 +42,7 @@ export CODACY_API_TOKEN="your-api-token-here"
 
 Run the script with minimal configuration:
 ```bash
-python codacy_to_semgrep.py
+python extractor.py
 ```
 
 This will prompt you for:
@@ -53,7 +53,7 @@ This will prompt you for:
 ### Command Line Options
 
 ```bash
-python codacy_to_semgrep.py --organization YOUR_ORG --provider gh --output custom_config.yaml
+python extractor.py --organization YOUR_ORG --provider gh --output custom_config.yaml
 ```
 
  name (defaults to semgrep_config.yaml)
