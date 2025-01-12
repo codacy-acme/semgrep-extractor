@@ -49,13 +49,17 @@ def spinner(message: str) -> Iterator[str]:
         yield f"\r{message} {symbols[i]}"
 
 def get_coding_standards(organization: str, provider: str) -> List[Dict[str, Any]]:
-    """Fetch coding standards from Codacy API."""
+    """Fetch non-draft coding standards from Codacy API."""
     spin = spinner("Fetching coding standards")
     url = f"{CODACY_API_BASE_URL}/organizations/{provider}/{organization}/coding-standards"
     response = requests.get(url, headers=get_codacy_headers())
     response.raise_for_status()
-    coding_standards = response.json()['data']
-    print("\rFetched coding standards  ")
+    all_standards = response.json()['data']
+    
+    # Filter out draft standards
+    coding_standards = [standard for standard in all_standards if not standard.get('isDraft', False)]
+    
+    print(f"\rFetched {len(coding_standards)} active coding standards (filtered {len(all_standards) - len(coding_standards)} drafts)  ")
     return coding_standards
 
 def select_coding_standard(coding_standards: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -267,7 +271,7 @@ def main() -> None:
         # 2. Get and select coding standards
         coding_standards = get_coding_standards(selected_organization, selected_provider)
         if not coding_standards:
-            raise Exception(f'No Coding Standards found for org {selected_organization}')
+            raise Exception(f'No active (non-draft) Coding Standards found for org {selected_organization}')
         
         selected_standard = select_coding_standard(coding_standards)
         coding_standard_id = selected_standard["id"]
