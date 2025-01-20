@@ -107,3 +107,4 @@ For issues and questions:
 - Codacy API documentation
 - Semgrep pattern documentation
 - All contributors to this project
+  
